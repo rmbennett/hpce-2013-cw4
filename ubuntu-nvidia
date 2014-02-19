@@ -1,0 +1,18 @@
+#!/bin/bash
+set -eu
+
+sudo add-apt-repository ppa:xorg-edgers/ppa -y
+sudo apt-get update
+sudo apt-get install nvidia-331 nvidia-opencl-icd-331 nvidia-libopencl1-331 -y
+
+echo "Checking that the library files are installed properly..."
+ls -al /usr/lib/x86_64-linux-gnu/libOpenCL.so || "libOpenCL not installed properly"
+echo "Checking that nVidia ICD is installed"
+ls -al /etc/OpenCL/vendors/nvidia.icd || "nVidia ICD is not installed!"
+
+echo "Done"
+
+# Extra Stuff
+# If you have a laptop with nVidia Optimus, you HAVE to set up bumblebee
+# according to https://wiki.ubuntu.com/Bumblebee and you MUST
+# run ALL your OpenCL programs using optirun
