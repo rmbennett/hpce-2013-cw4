@@ -378,10 +378,8 @@ types.
 
 Based on your `step_world_v1_lambda.cpp` code, create
 a new file called `step_world_v2_function.cpp` in the
-same directory, and
-rename the inner function to `hpce::your_login::StepWorldV2Function`.
-Make sure you can build and run the file before
-proceeding.
+same directory, and rename the inner function to `hpce::your_login::StepWorldV2Function`.
+Make sure you can build and run the file before proceeding.
 
 Currently it will have a lambda called `kernel_xy`; take
 the lambda outside the `StepWorldV2Function`, and
