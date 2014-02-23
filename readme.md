@@ -435,7 +435,7 @@ and:
 
 I used "const" on the world_state parameter to indicate that
 it is never modified inside the kernel. However, the
-converted `buffer` parameter cannot by const, as the kernel
+converted `buffer` parameter cannot be const, as the kernel
 must write to the array to produce output. This process
 helps show which arrays must be copied both to and from
 the GPU, and which only need to be copied one way.
@@ -1065,9 +1065,7 @@ The parameters to the function are:
 
 - &world.properties[0] : Pointer to the data in host memory we want to copy.
 
-Check that your program still compiles and runs. At this point it should
-still perform its normal function using software, but we are about to
-rip that out.
+Check that your program still compiles and runs. At this point it should still perform its normal function using software, but we are about to rip that out.
 
 So assuming everything compiles and runs, we will now move into
 the loop over `t`. The part we are going to replace
