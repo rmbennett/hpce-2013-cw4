@@ -1382,30 +1382,18 @@ This reduces the non-IO execution time down to 19.9-15.4 = 4.5 seconds, for a 1.
 Optimising memory accesses
 ==================
 
-One of the biggest problems in GPU programming is managing the different memory
-spaces. Slight differences in memory layout can cause large changes in
-execution time, while moving arrays and variables from global to private
-memory can have huge performance implications.
+One of the biggest problems in GPU programming is managing the different memory spaces. Slight differences in memory layout can cause large changes in execution time, while moving arrays and variables from global to private memory can have huge performance implications.
+
 In general, the best memory accesses are those which never happen, so
 it is worth-while trying to optimise them out. GPU compilers can be
-more conservative then CPU compilers, so it is a good idea to help them
-out.
+more conservative then CPU compilers, so it is a good idea to help them out.
 
 Looking at our current kernel, we can see that there are five reads to
-the `properties` array for a normal cell (non insulator). However, four
-of those reads are getting very little information back, as we only depend
-on a single bit of information from the four neighbours. A good approach
-in such scenarios is to try to pack data into spare bit-fields, increasing
-the information density and reducing the number of memory reads. In
-this case, we already have one 32-bit integer describing the properties,
-of which only 2 bits are currently being used. So as well as the 2 bits describing
-the properties of the current cell, we could quite reasonably include four
-bits describing whether the four neigbouring cells are insulators or not,
-saving a memory access.
+the `properties` array for a normal cell (non insulator). However, four of those reads are getting very little information back, as we only depend on a single bit of information from the four neighbours. 
 
-This requires two modifications: one in the host code to set up the more
-complex flags, and another in the kernel code to take advantage of the
-bits.
+A good approach in such scenarios is to try to pack data into spare bit-fields, increasing the information density and reducing the number of memory reads. In this case, we already have one 32-bit integer describing the properties, of which only 2 bits are currently being used. So as well as the 2 bits describing the properties of the current cell, we could quite reasonably include four bits describing whether the four neigbouring cells are insulators or not, saving a memory access.
+
+This requires two modifications: one in the host code to set up the more complex flags, and another in the kernel code to take advantage of the bits.
 
 ### Kernel code
 

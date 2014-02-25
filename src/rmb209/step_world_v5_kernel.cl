@@ -13,12 +13,13 @@ __kernel void kernel_xy(
 	__global float *buffer	// 4
 	)
 {
-	private uint myProps = properties[index];
+	
 	uint x=get_global_id(0);
 	uint y=get_global_id(1);
 	uint w=get_global_size(0);
 		
 	unsigned index=y*w + x;
+	private uint myProps = properties[index];
 			
 	if((properties[index] & Cell_Fixed) || (properties[index] & Cell_Insulator))
 	{

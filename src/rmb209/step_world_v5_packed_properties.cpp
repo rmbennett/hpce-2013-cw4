@@ -141,7 +141,7 @@ void StepWorldV4DoubleBuffered(world_t &world, float dt, unsigned n)
 
 	cl::Context context(devices);
 
-	std::string kernelSource=LoadSource("step_world_v3_kernel.cl");
+	std::string kernelSource=LoadSource("step_world_v5_kernel.cl");
 	
 	cl::Program::Sources sources;	// A vector of (data,length) pairs
 	sources.push_back(std::make_pair(kernelSource.c_str(), kernelSource.size()+1));	// push on our single string
